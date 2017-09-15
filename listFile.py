@@ -26,5 +26,4 @@ for opt, arg in opts:
 for dirname, dirnames, filenames in os.walk(folder):
      for subdirname in dirnames:
            print(os.path.join(dirname, subdirname))
-           print "test"
 
