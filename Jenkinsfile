@@ -4,18 +4,12 @@ pipeline {
     stage('Preparation') {
       parallel {
         stage('Preparation') {
-          agent {
-            node {
-              label 'linux'
-              customWorkspace '/home/yanbin/workspace/test/jenkinsnode'
-            }
-            
-          }
+          agent any
           steps {
             git 'https://github.com/AliceCodeZhang/sampleCode.git'
           }
         }
-        stage('') {
+        stage('error') {
           steps {
             sh 'sh "echo preparation2"'
           }
