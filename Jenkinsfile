@@ -9,7 +9,8 @@ pipeline {
             git 'https://github.com/AliceCodeZhang/sampleCode.git'
           }
         }
-        stage('error') {
+        stage('second') {
+          agent any
           steps {
             sh 'sh "echo preparation2"'
           }
