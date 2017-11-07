@@ -12,7 +12,7 @@ pipeline {
         stage('second') {
           agent any
           steps {
-            sh 'sh "echo preparation2"'
+            sh 'echo preparation2'
           }
         }
       }
