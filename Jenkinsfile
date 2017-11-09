@@ -4,7 +4,7 @@ pipeline {
     stage('Preparation') {
       parallel {
         stage('Preparation') {
-          agent any
+          agent 'mac'
           steps {
             git 'https://github.com/AliceCodeZhang/sampleCode.git'
           }
@@ -26,7 +26,7 @@ pipeline {
     }
     stage('Test') {
       parallel {
-        stage('stream 1') {
+        stage('node 1') {
           steps {
             node(label: 'linux') {
               label 'linux'
@@ -37,13 +37,14 @@ pipeline {
             
           }
         }
-        stage('stream 2') {
+        stage('node 2') {
           steps {
             node(label: 'mac') {
               label 'mac'
               sh 'pwd'
               sh 'sleep 20s'
               sh 'echo hello2'
+              sh 'python ./test/test.py'
             }
             
           }
