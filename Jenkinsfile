@@ -4,7 +4,9 @@ pipeline {
     stage('Preparation') {
       parallel {
         stage('Preparation') {
-          agent 'mac'
+          agent {
+          label 'mac'
+          }
           steps {
             git 'https://github.com/AliceCodeZhang/sampleCode.git'
           }
