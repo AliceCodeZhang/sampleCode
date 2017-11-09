@@ -32,25 +32,22 @@ pipeline {
     stage('Test') {
       parallel {
         stage('node 1') {
+          agent any
           steps {
-            node(label: 'linux') {
-              label 'linux'
               sh 'pwd'
               sh 'sleep 20s'
               sh 'echo hstream1'
-            }
-            
           }
         }
         stage('node 2') {
+          agent {
+            label 'mac'
+          }
           steps {
-            node(label: 'mac') {
-              label 'mac'
               sh 'pwd'
               sh 'sleep 20s'
               sh 'echo hello2'
               sh 'python ./test/test.py'
-            }
             
           }
         }
