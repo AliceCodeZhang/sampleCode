@@ -23,10 +23,25 @@ pipeline {
       }
     }
     stage('build') {
-      agent any
-      steps {
-        sh 'pwd'
-        echo 'abc'
+      parallel {
+        stage('build') {
+          agent any
+          steps {
+            sh 'pwd'
+            echo 'abc'
+          }
+        }
+        stage('build2') {
+          agent {
+            node {
+              label 'mac'
+            }
+            
+          }
+          steps {
+            sh 'echo "this is build2"'
+          }
+        }
       }
     }
     stage('Test') {
@@ -34,9 +49,9 @@ pipeline {
         stage('node 1') {
           agent any
           steps {
-              sh 'pwd'
-              sh 'sleep 20s'
-              sh 'echo hstream1'
+            sh 'pwd'
+            sh 'sleep 20s'
+            sh 'echo hstream1'
           }
         }
         stage('node 2') {
@@ -44,10 +59,9 @@ pipeline {
             label 'mac'
           }
           steps {
-              sh 'pwd'
-              sh 'sleep 20s'
-              sh 'echo hello2'
-            
+            sh 'pwd'
+            sh 'sleep 20s'
+            sh 'echo hello2'
           }
         }
       }
