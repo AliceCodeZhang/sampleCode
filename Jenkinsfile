@@ -64,6 +64,11 @@ pipeline {
             sh 'echo hello2'
           }
         }
+        stage('node3') {
+          steps {
+            sh 'pwd'
+          }
+        }
       }
     }
   }
