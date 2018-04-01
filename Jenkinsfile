@@ -6,7 +6,7 @@ pipeline {
         stage('Preparation') {
           agent {
             node {
-              label 'mac'
+              label 'mac_node'
             }
             
           }
@@ -41,7 +41,7 @@ pipeline {
         }
         stage('node 2') {
           agent {
-            label 'mac'
+            label 'mac_node'
           }
           steps {
               sh 'pwd'
