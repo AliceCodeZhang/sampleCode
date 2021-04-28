@@ -27,10 +27,11 @@ pipeline {
     stage('Test') {
       parallel {
         stage('node 1') {
-          agent 'master'
+          agent {
+            label 'master'
+          }
           steps {
-              sh 'pwd'
-              sh 'sleep 20s'
+              sh 'echo run test at master'
               sh 'python ./test/test.py'
           }
         }
@@ -40,9 +41,8 @@ pipeline {
           }
           steps {
               sh 'pwd'
-              sh 'sleep 20s'
-              sh 'echo slave1'
-              sh 'python ./test/test.py'
+              sh 'echo run test at slave1'
+              sh 'python ./test/test2.py'
             
           }
         }
