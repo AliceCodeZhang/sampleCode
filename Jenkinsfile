@@ -1,53 +1,48 @@
+void setBuildStatus(String jsUrl, String message, String state) {
+    step([
+        $class: "GitHubCommitStatusSetter",
+        reposSource: [$class: "ManuallyEnteredRepositorySource", url: jsUrl],
+        contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/sampleCode"],
+        errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+        statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
+    ]);
+}
+
+
 pipeline {
   agent none
+  options {
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr:'20'))
+        timeout(time: 30, unit: 'MINUTES')
+  }
   stages {
-    stage('Preparation') {
-      parallel {
-        stage('Preparation') {
-          agent {
-            node {
-              label 'mac_node'
-            }
-            
-          }
-          steps {
-            git 'https://github.com/AliceCodeZhang/sampleCode.git'
-          }
-        }
-        stage('second') {
-          agent any
-          steps {
-            sh 'echo preparation2'
-          }
-        }
-      }
-    }
     stage('build') {
       agent any
       steps {
         sh 'pwd'
-        echo 'abc'
+        echo 'build'
       }
     }
     stage('Test') {
       parallel {
         stage('node 1') {
-          agent any
+          agent {
+            label 'master'
+          }
           steps {
-              sh 'pwd'
-              sh 'sleep 20s'
-              sh 'echo hstream1'
+              sh 'echo run test at master'
+              sh 'python ./test/test.py'
           }
         }
         stage('node 2') {
           agent {
-            label 'mac_node'
+            label 'slave1'
           }
           steps {
               sh 'pwd'
-              sh 'sleep 20s'
-              sh 'echo hello2'
-              sh 'python ./test/test.py'
+              sh 'echo run test at slave1'
+              sh 'python ./test/test2.py'
             
           }
         }
