@@ -1,7 +1,6 @@
 import unittest
 import sys
-sys.path.append("..")
-from src import sample
+import sample
 
 class TestCaculatorMethods(unittest.TestCase):
     def test_add(self):

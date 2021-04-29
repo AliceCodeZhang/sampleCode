@@ -32,7 +32,7 @@ pipeline {
           }
           steps {
               sh 'echo run test at master'
-              sh 'python ./test/test.py'
+              sh 'python ./src/test.py'
           }
         }
         stage('node 2') {
@@ -42,7 +42,7 @@ pipeline {
           steps {
               sh 'pwd'
               sh 'echo run test at slave1'
-              sh 'python ./test/test2.py'
+              sh 'python ./src/test2.py'
             
           }
         }
