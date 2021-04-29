@@ -1,5 +1,4 @@
 import unittest
-import sys
 import sample
 
 class TestCaculatorMethods(unittest.TestCase):
