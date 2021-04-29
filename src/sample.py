@@ -11,4 +11,7 @@ class Caculator:
      #This function multiplies two numbers
      def multiply(self):
          return self.x*self.y
+     #This function divide two numbers
+     def divide(self):
+         return self.x/self.y
 
