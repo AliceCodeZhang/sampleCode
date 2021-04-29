@@ -1,14 +1,15 @@
 import unittest
+import sys
+sys.path.append("..")
+from src import sample
 
-class TestUpperMethods(unittest.TestCase):
-
-    def test_upper(self):
-        self.assertEqual('foo'.upper(), 'FOO')
-
-    def test_isupper(self):
-        self.assertTrue('FOO'.isupper())
-        self.assertFalse('Foo'.isupper())
-
+class TestCaculatorMethods(unittest.TestCase):
+    def test_substrac(self):
+        ca = sample.Caculator(4,2)
+        self.assertEqual(2,ca.substrac())
+    def test_multiply(self):
+        ca = sample.Caculator(2,5)
+        self.assertEqual(10,ca.multiply())
 
 if __name__ == '__main__':
     unittest.main()
