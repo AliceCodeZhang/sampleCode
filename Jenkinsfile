@@ -25,17 +25,6 @@ pipeline {
       }
     }
     stage('Test') {
-      parallel {
-        stage('node 1') {
-          agent {
-            label 'master'
-          }
-          steps {
-              sh 'echo run test at master'
-              sh 'python ./src/test.py'
-          }
-        }
-        stage('node 2') {
           agent {
             label 'slave1'
           }
@@ -46,7 +35,5 @@ pipeline {
             
           }
         }
-      }
-    }
   }
 }
